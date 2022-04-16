@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "94e37861-87a0-41c6-ba8c-68670b8d0fc8",
+		"name": "post-heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "取得所有 post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://nameless-temple-78650.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"nameless-temple-78650",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增單筆 post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"hobby\",\n    \"tags\": [\"動漫\"],\n    \"type\": \"group\",\n    \"image\": \"\",\n    \"content\": \"排球少年好熱血！！\",\n    \"likes\": 433,\n    \"comments\": 234\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://nameless-temple-78650.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"nameless-temple-78650",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除單筆 post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://nameless-temple-78650.herokuapp.com/posts/625ad98458b32f3e9d2e66aa",
+					"protocol": "https",
+					"host": [
+						"nameless-temple-78650",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						"625ad98458b32f3e9d2e66aa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "編輯單筆 post",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"image\": \"https://thumbor.4gamers.com.tw/YZLDB-8vq8hgaITK4n60Al8oys4=/800x0/filters:extract_cover():no_upscale():quality(80)/https%3A%2F%2Fimg.4gamers.com.tw%2Fckfinder%2Fimages%2FKaty%2Fnew%20games-03%2F%E9%96%93%E8%AB%9C%E5%AE%B6%E5%AE%B6%E9%85%92-%E7%AC%AC%E4%B8%80%E9%9B%86%E5%A0%B4%E6%99%AF%E5%9C%96%20%283%29.jpg%3FversionId%3DMx1zZ1EwlT6_PB5LewlffUU5GEjIqsdq\",\n    \"content\": \"安妮亞很可愛\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://nameless-temple-78650.herokuapp.com/posts/625ad80558b32f3e9d2e66a1",
+					"protocol": "https",
+					"host": [
+						"nameless-temple-78650",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						"625ad80558b32f3e9d2e66a1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除所有 post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://nameless-temple-78650.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"nameless-temple-78650",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
