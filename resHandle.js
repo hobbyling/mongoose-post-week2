@@ -17,8 +17,10 @@ exports.successHandle = function (res, data) {
 }
 
 exports.errorHandle = function (res, code, error) {
+  console.log('error')
+  console.log(error)
   const message = code === 400
-    ? "欄位格式錯誤，或無此 todo id"
+    ? "欄位格式錯誤，或無此 id"
     : "無此網路路由"
   res.writeHead(400, headers)
   if (error) {

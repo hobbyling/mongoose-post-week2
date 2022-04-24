@@ -6,6 +6,8 @@ const dotenv = require('dotenv')
 
 dotenv.config({ path: "./config.env" })
 const DB = process.env.DATABASE.replace('<password>', process.env.DATABASE_PASSWORD)
+
+// const DB = "mongodb://localhost:27017/posts"
 // 連接資料庫
 mongoose.connect(DB)
   .then(() => {
@@ -40,11 +42,18 @@ const requestListener = async (req, res) => {
   } else if (req.url.startsWith('/posts/') && req.method === 'DELETE') {
     // 取得欲刪除資料的 ID
     const id = req.url.split('/').pop()
-    await Post.findByIdAndDelete(id)
 
-    // 列出剩下的資料
-    const posts = await Post.find()
-    resHandle.successHandle(res, posts)
+    // 查詢是否有此 ID
+    const hasId = await Post.findById(id)
+    if (hasId) {
+      await Post.findByIdAndDelete(id)
+
+      // 列出剩下的資料
+      const posts = await Post.find()
+      resHandle.successHandle(res, posts)
+    } else {
+      resHandle.errorHandle(res, 400, [{ message: '查無此 id' }])
+    }
   } else if (req.url.startsWith('/posts/') && req.method === 'PATCH') {
     req.on('end', async () => {
       try {
@@ -53,12 +62,24 @@ const requestListener = async (req, res) => {
 
         // 取得欲修改的內容
         const data = JSON.parse(body)
-        await Post.findByIdAndUpdate(id, { ...data })
+
+        // 查詢是否有此 ID
+        const hasId = await Post.findById(id)
+        if (hasId) {
+          // 若 content 為空值，則返回錯誤
+          if (!data.content) {
+            resHandle.errorHandle(res, 400, [{ message: 'Content 未填寫' }])
+          }
+
+          await Post.findByIdAndUpdate(id, { ...data })
 
 
-        const post = await Post.findOne({ "_id": id })
+          const post = await Post.findOne({ "_id": id })
 
-        resHandle.successHandle(res, post)
+          resHandle.successHandle(res, post)
+        } else {
+          resHandle.errorHandle(res, 400, [{ message: '查無此 id' }])
+        }
 
       } catch (error) {
         resHandle.errorHandle(res, 400, error.errors)
